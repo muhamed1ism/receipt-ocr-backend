@@ -1,16 +1,15 @@
-package org.ssnardo.receipt_ocr.user.repository;
+package org.ssnardo.receipt_ocr.user;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.ssnardo.receipt_ocr.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-  Optional<User> findByEmail(String email);
 
-  Boolean existsByEmail(String email);
+    Optional<User> findByEmail(String email);
 
+    Boolean existsByEmail(String email);
 }

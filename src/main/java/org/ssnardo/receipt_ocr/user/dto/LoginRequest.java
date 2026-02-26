@@ -16,11 +16,11 @@ import lombok.Setter;
 @Builder
 public class LoginRequest {
 
-  @Email
-  @NotBlank
-  private String email;
+    @Email
+    @NotBlank
+    private String email;
 
-  @NotBlank
-  @Size(min = 8)
-  private String password;
+    @NotBlank
+    @Size(min = 8)
+    private String password;
 }

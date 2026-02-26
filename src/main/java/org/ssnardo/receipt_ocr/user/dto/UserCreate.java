@@ -16,18 +16,18 @@ import lombok.Setter;
 @Builder
 public class UserCreate {
 
-  @Email
-  @NotBlank
-  private String email;
+    @Email
+    @NotBlank
+    private String email;
 
-  @NotBlank
-  @Size(min = 8)
-  private String password;
+    @NotBlank
+    @Size(min = 8)
+    private String password;
 
-  @NotBlank
-  private String role;
+    @NotBlank
+    private String role;
 
-  private boolean isActive;
+    private boolean isActive;
 
-  private boolean isSuperuser;
+    private boolean isSuperuser;
 }

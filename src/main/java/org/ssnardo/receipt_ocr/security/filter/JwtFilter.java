@@ -20,26 +20,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-  private final JwtUtil jwtUtil;
-  private final CustomUserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService userDetailsService;
 
-  @Override
-  public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-      throws IOException, ServletException {
-    String header = request.getHeader("Authorization");
+    @Override
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        String header = request.getHeader("Authorization");
 
-    if (header != null && header.startsWith("Bearer ")) {
-      String token = header.substring(7);
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
 
-      if (jwtUtil.validateToken(token)) {
-        String email = jwtUtil.extractEmail(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null,
-            userDetails.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-      }
+            if (jwtUtil.validateToken(token)) {
+                String email = jwtUtil.extractEmail(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,
+                        null,
+                        userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+        }
+
+        chain.doFilter(request, response);
     }
-
-    chain.doFilter(request, response);
-  }
 }

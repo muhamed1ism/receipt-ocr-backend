@@ -3,6 +3,8 @@ package org.ssnardo.receipt_ocr.user.dto;
 import java.time.Instant;
 import java.util.UUID;
 
+import org.ssnardo.receipt_ocr.profile.dto.ProfileResponse;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +18,11 @@ import lombok.Setter;
 @Builder
 public class UserResponse {
 
-  private UUID id;
-  private String email;
-  private boolean isActive;
-  private String role;
-  private Instant createdAt;
-  private Instant updatedAt;
+    private UUID id;
+    private String email;
+    private boolean isActive;
+    private String role;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private ProfileResponse profile;
 }

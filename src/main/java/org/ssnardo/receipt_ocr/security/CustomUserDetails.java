@@ -13,30 +13,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
-  private final User user;
+    private final User user;
 
-  public User getUser() {
-    return user;
-  }
+    public User getUser() {
+        return user;
+    }
 
-  @Override
-  public String getUsername() {
-    return user.getEmail();
-  }
+    @Override
+    public String getUsername() {
+        return user.getEmail();
+    }
 
-  @Override
-  public String getPassword() {
-    return user.getHashedPassword();
-  }
+    @Override
+    public String getPassword() {
+        return user.getHashedPassword();
+    }
 
-  @Override
-  public boolean isEnabled() {
-    return user.isActive();
-  }
+    @Override
+    public boolean isEnabled() {
+        return user.isActive();
+    }
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(user.getRole()));
-  }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(user.getRole()));
+    }
 
 }

@@ -16,28 +16,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-  @Autowired
-  private JwtFilter jwtFilter;
+    @Autowired
+    private JwtFilter jwtFilter;
 
-  @Bean
-  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    return http.csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers(
-                "/swagger-ui/**",
-                "/v3/api-docs/**",
-                "/actuator/**",
-                "/api/v1/auth/**")
-            .permitAll()
-            .anyRequest().authenticated())
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-        .build();
-  }
-  //
-  // @Bean
-  // public AuthenticationManager
-  // authenticationManager(AuthenticationConfiguration configuration)
-  // throws Exception {
-  // return configuration.getAuthenticationManager();
-  // }
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/actuator/**",
+                                "/api/v1/auth/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+    //
+    // @Bean
+    // public AuthenticationManager
+    // authenticationManager(AuthenticationConfiguration configuration)
+    // throws Exception {
+    // return configuration.getAuthenticationManager();
+    // }
 }

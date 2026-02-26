@@ -15,15 +15,15 @@ import lombok.Setter;
 @Builder
 public class UserUpdate {
 
-  @Email
-  private String email;
+    @Email
+    private String email;
 
-  @Size(min = 8)
-  private String password;
+    @Size(min = 8)
+    private String password;
 
-  private String role;
+    private String role;
 
-  private Boolean isActive;
+    private Boolean isActive;
 
-  private Boolean isSuperuser;
+    private Boolean isSuperuser;
 }

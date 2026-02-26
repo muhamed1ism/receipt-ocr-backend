@@ -20,23 +20,23 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-  private final JwtUtil jwtUtil;
-  private final AuthService authService;
+    private final JwtUtil jwtUtil;
+    private final AuthService authService;
 
-  @PostMapping("/login")
-  public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-    if (!"password".equals(request.getPassword())) {
-      return ResponseEntity.status(401).body("Invalid credentials");
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        if (!authService.comparePassword(request)) {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+
+        String token = jwtUtil.generateToken(request.getEmail());
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    String token = jwtUtil.generateToken(request.getEmail());
-    return ResponseEntity.ok(new JwtResponse(token));
-  }
-
-  @PostMapping("/register")
-  ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegister registerDto) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerUser(registerDto));
-  }
+    @PostMapping("/register")
+    ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegister registerDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerUser(registerDto));
+    }
 }
 
 record JwtResponse(String token) {

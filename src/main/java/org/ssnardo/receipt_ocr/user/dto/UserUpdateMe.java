@@ -15,9 +15,9 @@ import lombok.Setter;
 @Builder
 public class UserUpdateMe {
 
-  @Email
-  private String email;
+    @Email
+    private String email;
 
-  @Size(min = 8)
-  private String password;
+    @Size(min = 8)
+    private String password;
 }
