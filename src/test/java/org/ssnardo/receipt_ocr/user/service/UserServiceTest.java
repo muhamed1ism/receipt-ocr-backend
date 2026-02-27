@@ -14,9 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.ssnardo.receipt_ocr.common.exception.*;
 import org.ssnardo.receipt_ocr.security.CustomUserDetails;
-import org.ssnardo.receipt_ocr.user.User;
-import org.ssnardo.receipt_ocr.user.UserMapper;
-import org.ssnardo.receipt_ocr.user.UserRepository;
+import org.ssnardo.receipt_ocr.user.entity.User;
+import org.ssnardo.receipt_ocr.user.mapper.UserMapper;
+import org.ssnardo.receipt_ocr.user.repository.UserRepository;
 import org.ssnardo.receipt_ocr.user.dto.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,9 +51,8 @@ class UserServiceTest {
         User user = new User();
 
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
-        when(userMapper.toResponseDto(user)).thenReturn(new UserResponse());
 
-        UserResponse result = userService.getUserById(id);
+        User result = userService.getUserById(id);
 
         assertThat(result).isNotNull();
     }

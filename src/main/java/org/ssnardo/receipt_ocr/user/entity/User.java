@@ -1,9 +1,9 @@
-package org.ssnardo.receipt_ocr.user;
+package org.ssnardo.receipt_ocr.user.entity;
 
 import java.time.Instant;
 import java.util.UUID;
 
-import org.ssnardo.receipt_ocr.profile.Profile;
+import org.ssnardo.receipt_ocr.profile.entity.Profile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

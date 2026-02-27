@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.ssnardo.receipt_ocr.security.CustomUserDetailsService;
+import org.ssnardo.receipt_ocr.security.service.CustomUserDetailsService;
 import org.ssnardo.receipt_ocr.security.util.JwtUtil;
 
 import jakarta.servlet.FilterChain;

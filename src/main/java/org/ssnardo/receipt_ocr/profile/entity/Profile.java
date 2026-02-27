@@ -1,9 +1,10 @@
-package org.ssnardo.receipt_ocr.profile;
+package org.ssnardo.receipt_ocr.profile.entity;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.ssnardo.receipt_ocr.user.User;
+import org.ssnardo.receipt_ocr.profile.enums.CurrencyEnum;
+import org.ssnardo.receipt_ocr.user.entity.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

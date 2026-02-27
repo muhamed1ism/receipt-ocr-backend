@@ -1,4 +1,4 @@
-package org.ssnardo.receipt_ocr.profile;
+package org.ssnardo.receipt_ocr.profile.enums;
 
 public enum CurrencyEnum {
     BAM,

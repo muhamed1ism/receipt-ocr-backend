@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.ssnardo.receipt_ocr.user.User;
-import org.ssnardo.receipt_ocr.user.UserMapper;
+import org.ssnardo.receipt_ocr.user.mapper.UserMapper;
 import org.ssnardo.receipt_ocr.user.dto.UserCreate;
 import org.ssnardo.receipt_ocr.user.dto.UserResponse;
 import org.ssnardo.receipt_ocr.user.dto.UserUpdate;
 import org.ssnardo.receipt_ocr.user.dto.UserUpdateMe;
 import org.ssnardo.receipt_ocr.user.service.UserService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -35,38 +33,47 @@ public class UserController {
 
     @GetMapping()
     ResponseEntity<List<UserResponse>> getAllUsers() {
+
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/me")
     ResponseEntity<UserResponse> getCurrentUser() {
-        User currentUser = userService.getCurrentUser();
-        return ResponseEntity.ok(userMapper.toResponseDto(currentUser));
+
+        UserResponse currentUser = userMapper.toResponseDto(userService.getCurrentUser());
+        return ResponseEntity.ok(currentUser);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a user by ID", description = "Returns a single user by their UUID")
-    ResponseEntity<UserResponse> getUserById(@PathVariable UUID id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    // @Operation(summary = "Get a user by ID", description = "Returns a single user
+    // by their UUID")
+    ResponseEntity<UserResponse> getUserById(@PathVariable("id") UUID id) {
+
+        UserResponse user = userMapper.toResponseDto(userService.getUserById(id));
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping()
-    ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreate userDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
+    ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreate dto) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(dto));
     }
 
     @PatchMapping("/me")
-    ResponseEntity<UserResponse> updateUserMe(@Valid @RequestBody UserUpdateMe updateDto) {
-        return ResponseEntity.ok(userService.updateUserMe(updateDto));
+    ResponseEntity<UserResponse> updateUserMe(@Valid @RequestBody UserUpdateMe dto) {
+
+        return ResponseEntity.ok(userService.updateUserMe(dto));
     }
 
     @PatchMapping("/{id}")
-    ResponseEntity<UserResponse> updateUser(@PathVariable UUID id, @Valid @RequestBody UserUpdate updateDto) {
-        return ResponseEntity.ok(userService.updateUser(updateDto, id));
+    ResponseEntity<UserResponse> updateUser(@PathVariable("id") UUID id, @Valid @RequestBody UserUpdate dto) {
+
+        return ResponseEntity.ok(userService.updateUser(dto, id));
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+    ResponseEntity<Void> deleteUser(@PathVariable("id") UUID id) {
+
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

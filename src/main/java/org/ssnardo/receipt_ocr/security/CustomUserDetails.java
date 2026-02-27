@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.ssnardo.receipt_ocr.user.User;
+import org.ssnardo.receipt_ocr.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 

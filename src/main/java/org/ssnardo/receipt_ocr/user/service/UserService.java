@@ -13,9 +13,9 @@ import org.ssnardo.receipt_ocr.common.exception.ResourceAlreadyExistsException;
 import org.ssnardo.receipt_ocr.common.exception.ResourceNotFoundException;
 import org.ssnardo.receipt_ocr.common.exception.UnauthenticatedException;
 import org.ssnardo.receipt_ocr.security.CustomUserDetails;
-import org.ssnardo.receipt_ocr.user.User;
-import org.ssnardo.receipt_ocr.user.UserMapper;
-import org.ssnardo.receipt_ocr.user.UserRepository;
+import org.ssnardo.receipt_ocr.user.entity.User;
+import org.ssnardo.receipt_ocr.user.mapper.UserMapper;
+import org.ssnardo.receipt_ocr.user.repository.UserRepository;
 import org.ssnardo.receipt_ocr.user.dto.UserCreate;
 import org.ssnardo.receipt_ocr.user.dto.UserResponse;
 import org.ssnardo.receipt_ocr.user.dto.UserUpdate;
@@ -39,11 +39,11 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserResponse getUserById(UUID id) {
+    public User getUserById(UUID id) {
 
         return userRepository.findById(id)
-                .map(userMapper::toResponseDto)
-                .orElseThrow(() -> new ResourceNotFoundException("User with ID " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "User with ID " + id + " not found"));
     }
 
     public User getCurrentUser() {
@@ -70,8 +70,7 @@ public class UserService {
     @Transactional
     public UserResponse updateUser(UserUpdate updateDto, UUID id) {
 
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with ID " + id + " not found"));
+        User user = getUserById(id);
         userMapper.updateEntityFromDto(updateDto, user);
         return userMapper.toResponseDto(userRepository.save(user));
     }
@@ -84,8 +83,8 @@ public class UserService {
     }
 
     public void deleteUser(UUID id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with ID " + id + " not found"));
+
+        User user = getUserById(id);
         userRepository.delete(user);
     }
 }

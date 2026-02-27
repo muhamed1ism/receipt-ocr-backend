@@ -1,17 +1,18 @@
-package org.ssnardo.receipt_ocr.user;
+package org.ssnardo.receipt_ocr.user.mapper;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.ssnardo.receipt_ocr.profile.Profile;
+import org.ssnardo.receipt_ocr.profile.entity.Profile;
 import org.ssnardo.receipt_ocr.profile.dto.ProfileResponse;
 import org.ssnardo.receipt_ocr.user.dto.UserCreate;
 import org.ssnardo.receipt_ocr.user.dto.UserRegister;
 import org.ssnardo.receipt_ocr.user.dto.UserResponse;
 import org.ssnardo.receipt_ocr.user.dto.UserUpdate;
 import org.ssnardo.receipt_ocr.user.dto.UserUpdateMe;
+import org.ssnardo.receipt_ocr.user.entity.User;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
